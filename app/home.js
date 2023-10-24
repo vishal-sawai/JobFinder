@@ -24,7 +24,7 @@ const home = () => {
         auth
             .signOut()
             .then(() => {
-                navigation.replace("Login")
+                router.replace("/signin")
             })
             .catch(error => alert(error.message))
     }
@@ -68,6 +68,16 @@ const home = () => {
                     <Popularjobs />
                     <Nearbyjobs />
                 </View>
+
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity
+                        onPress={handleSignOut}
+                        style={styles.button}
+                    >
+                        <Text style={styles.buttonText}>LogOut</Text>
+                    </TouchableOpacity>
+                </View>
+
             </ScrollView>
         </SafeAreaView>
 
