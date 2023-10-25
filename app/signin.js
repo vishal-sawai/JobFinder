@@ -29,7 +29,33 @@ export default function signin() {
                 const user = userCredentials.user;
                 console.log('Logged in with:', user.email);
             })
-            .catch(error => alert(error.message))
+            .catch((error) => {
+                const errorMessage = error.message;
+                const errorCode = error.code;
+                switch (errorCode) {
+                    case 'auth/invalid-email':
+                        return alert('Email address is not valid.');
+                        break;
+                    case 'auth/user-not-found':
+                        return alert('User not found.');
+                        break;
+                    case 'auth/network-request-failed':
+                        return alert('Network error.');
+                        break;
+                    case 'auth/wrong-password':
+                        return alert('Wrong password.');
+                        break;
+                    case 'auth/too-many-requests':
+                        return alert('Too many requests.');
+                        break;
+                    case 'auth/invalid-login-credentials':
+                        return alert('Invalid credentials.');
+                        break;
+                    default:
+                        return alert(errorMessage);
+                }
+
+            });
     }
 
     return (

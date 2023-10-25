@@ -1,9 +1,10 @@
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+// import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { auth } from '../firebase'
+import { auth, firestore } from '../firebase'
 import { useState } from "react";
 import { Stack, useRouter } from "expo-router";
+
 
 import { COLORS, icons, images, SIZES } from "../constants";
 import {
@@ -14,11 +15,24 @@ import {
 } from "../components";
 
 const home = () => {
+
+    const [user, setUser] = useState(null);
+
+    React.useEffect(() => {
+        auth.onAuthStateChanged((u) => {
+            setUser(u);
+        });
+    }, []);
+    let userId = '';
+    if (user != null) {
+        userId = user.uid;
+    }
+
     const router = useRouter()
     const [searchTerm, setSearchTerm] = useState("");
 
 
-    const navigation = useNavigation()
+    // const navigation = useNavigation()
 
     const handleSignOut = () => {
         auth

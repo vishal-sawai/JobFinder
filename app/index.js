@@ -21,13 +21,16 @@ export default function page() {
         <Link href="/signin" asChild>
           <TouchableOpacity style={styles.btn}>
             <Text style={styles.btnText}
-            // onPress={router.replace("/signin")}
             >SignIn</Text>
           </TouchableOpacity>
         </Link>
-        <TouchableOpacity style={[styles.btn, styles.btnSignup]}>
-          <Text style={[styles.btnText, styles.textSignup]}>SignUp</Text>
-        </TouchableOpacity>
+        <Link href="/Signup" asChild>
+          <TouchableOpacity style={[styles.btn, styles.btnSignup]}>
+            <View style={[styles.btn, styles.btnSignup]}>
+              <Text style={[styles.btnText, styles.textSignup]}>SignUp</Text>
+            </View>
+          </TouchableOpacity>
+        </Link>
       </View>
     </View>
   )
