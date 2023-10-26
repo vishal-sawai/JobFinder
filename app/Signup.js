@@ -1,6 +1,6 @@
 // SignupScreen.js
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, KeyboardAvoidingView, ScrollView, StyleSheet, Image } from 'react-native';
 import { auth, firestore } from '../firebase';
 import { router } from 'expo-router';
 
@@ -58,32 +58,93 @@ const Signup = () => {
 
 
     return (
-        <View style={{ margin: 52 }}>
-            <Text>Sign Up</Text>
-            <TextInput
-                placeholder="Name"
-                value={name}
-                onChangeText={setName}
-            />
-            <TextInput
-                placeholder="Phone"
-                value={phone}
-                onChangeText={setPhone}
-            />
-            <TextInput
-                placeholder="Email"
-                value={email}
-                onChangeText={setEmail}
-            />
-            <TextInput
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-            />
-            <Button title="Signup" onPress={handleSignup} />
-        </View>
+        <ScrollView style={{ flex: 1, backgroundColor: 'white' }} useRef='scroll'>
+            <KeyboardAvoidingView behavior='position' style={{ backgroundColor: 'white', flex: 1 }}>
+                <View style={styles.container}>
+                    <Image
+                        source={require('../assets/images/signup.png')}
+                        style={styles.image}
+                    />
+
+                    <View>
+                        <Text style={styles.pageHeading}>Sign Up</Text>
+                    </View>
+                    <View style={styles.form}>
+                        <Text style={styles.label}>Name</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter Your Full Name"
+                            value={name}
+                            onChangeText={setName}
+                        />
+                        <Text style={styles.label}>Phone</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter Your Phone No"
+                            value={phone}
+                            onChangeText={setPhone}
+                        />
+
+                        <Text style={styles.label}>Email</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter your email"
+                            value={email}
+                            onChangeText={setEmail}
+                            keyboardType="email-address"
+                        />
+                        <Text style={styles.label}>Password</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Password"
+                            value={password}
+                            onChangeText={setPassword}
+                            secureTextEntry
+                        />
+                        <Button title="Signup" onPress={handleSignup} />
+                    </View>
+                </View>
+            </KeyboardAvoidingView>
+        </ScrollView>
     );
 };
 
 export default Signup;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: '#FDFEFE'
+    },
+    image: {
+        width: 250,
+        height: 150,
+        marginTop: '5%'
+    },
+    pageHeading: {
+        fontWeight: '500',
+        fontSize: 30,
+        color: '#8E44AD',
+        marginTop: 10
+    },
+    form: {
+        marginTop: 25,
+    },
+    label: {
+        fontSize: 15,
+        marginBottom: 4,
+        marginLeft: 8,
+        color: '#566573',
+        fontWeight: '400'
+    },
+    input: {
+        borderWidth: 2,
+        borderColor: '#ccc',
+        paddingVertical: 5,
+        paddingHorizontal: 8,
+        marginBottom: 15,
+        borderRadius: 10,
+        width: 300
+    },
+});

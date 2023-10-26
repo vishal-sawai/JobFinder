@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Button } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { auth } from '../firebase'
 import { router } from 'expo-router';
@@ -88,14 +88,7 @@ export default function signin() {
                             onChangeText={handlePasswordChange}
                             secureTextEntry={true}
                         />
-                        <View style={{ alignItems: 'center' }}>
-                            <TouchableOpacity
-                                onPress={handeleLogin}
-                                style={styles.loginBtn}
-                            >
-                                <Text style={styles.loginBtnText}>Login</Text>
-                            </TouchableOpacity>
-                        </View>
+                        <Button title="Login" onPress={handeleLogin} />
                     </View>
                 </View>
             </KeyboardAvoidingView>

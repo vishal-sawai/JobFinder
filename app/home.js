@@ -1,5 +1,4 @@
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
-// import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { auth, firestore } from '../firebase'
 import { useState } from "react";
