@@ -18,7 +18,9 @@ const Nearbyjobs = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Nearby jobs</Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+          s="Full Time Job In India"
+          handleNavigate={() => { router.push(`/search/${s}`) }}>
           <Text style={styles.headerBtn}>Show all</Text>
         </TouchableOpacity>
       </View>

@@ -1,8 +1,22 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import React from 'react'
-import { Link, Stack, router } from 'expo-router';
+import React, { useState, useEffect } from 'react'
+import { Link, Stack, Redirect, } from 'expo-router';
+import { auth } from '../firebase'
 
 export default function page() {
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((u) => {
+      setUser(u);
+    });
+  }, []);
+  if (user) {
+    return <Redirect href="/home" />;
+  }
+
+
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ headerShown: false }} />

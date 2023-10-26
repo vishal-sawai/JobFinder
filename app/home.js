@@ -22,16 +22,34 @@ const home = () => {
             setUser(u);
         });
     }, []);
-    let userId = '';
+
+    // firebase get data
+    const db = firestore;
+    let userData = {};
     if (user != null) {
-        userId = user.uid;
+        // Retrieve data from a specific collection and document
+        db.collection('users').doc(user.uid).get()
+            .then((doc) => {
+                if (doc.exists) {
+                    userData = doc.data();
+                }
+            })
+            .catch((error) => {
+                // Handle errors
+                console.error(error);
+            });
     }
+
+    console.log("this is email " + userData.email)
+    console.log("this is name " + userData.name)
+    console.log("this is phone " + userData.phone)
+
+
 
     const router = useRouter()
     const [searchTerm, setSearchTerm] = useState("");
 
 
-    // const navigation = useNavigation()
 
     const handleSignOut = () => {
         auth
@@ -42,6 +60,7 @@ const home = () => {
             .catch(error => alert(error.message))
     }
 
+
     return (
 
 
@@ -51,10 +70,10 @@ const home = () => {
                     headerStyle: { backgroundColor: COLORS.lightWhite },
                     headerShadowVisible: false,
                     headerLeft: () => (
-                        <ScreenHeaderBtn iconUrl={icons.menu} dimension='60%' />
+                        <ScreenHeaderBtn iconUrl={icons.menu} dimension='0%' />
                     ),
                     headerRight: () => (
-                        <ScreenHeaderBtn iconUrl={images.profile} dimension='100%' />
+                        <ScreenHeaderBtn iconUrl={images.profile} dimension='100%' onClick={() => console.log('Button clicked!')} />
                     ),
                     headerTitle: "",
                 }}
