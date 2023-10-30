@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Button } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { auth } from '../firebase'
-import { router } from 'expo-router';
+import { router, Redirect } from 'expo-router';
 
 export default function signin() {
     const [email, setEmail] = useState('');
@@ -18,6 +18,7 @@ export default function signin() {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
                 router.replace("/home")
+
             }
         })
         return unsubscribe

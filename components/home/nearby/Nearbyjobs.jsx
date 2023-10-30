@@ -20,7 +20,7 @@ const Nearbyjobs = () => {
         <Text style={styles.headerTitle}>Nearby jobs</Text>
         <TouchableOpacity
           s="Full Time Job In India"
-          handleNavigate={() => { router.push(`/search/${s}`) }}>
+          handleNavigate={() => { router.push(`/home/search/${s}`) }}>
           <Text style={styles.headerBtn}>Show all</Text>
         </TouchableOpacity>
       </View>
@@ -35,7 +35,7 @@ const Nearbyjobs = () => {
             <NearbyJobCard
               job={job}
               key={`nearby-job-${job.job_id}`}
-              handleNavigate={() => router.push(`/job-details/${job.job_id}`)}
+              handleNavigate={() => router.push(`/home/job-details/${job.job_id}`)}
             />
           ))
         )}

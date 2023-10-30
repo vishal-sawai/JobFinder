@@ -1,7 +1,7 @@
 {
   "name": "jobfinder",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -12,6 +12,7 @@
     "@expo/webpack-config": "^19.0.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-masked-view/masked-view": "0.2.9",
+    "@react-navigation/drawer": "^6.6.6",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/native-stack": "^6.9.15",
     "@react-navigation/stack": "^6.3.19",

@@ -13,7 +13,7 @@ export default function page() {
     });
   }, []);
   if (user) {
-    return <Redirect href="/home" />;
+    return <Redirect href={"/(drawer)/home"} />;
   }
 
 

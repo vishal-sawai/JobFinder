@@ -4,9 +4,10 @@ import { Stack, useRouter, useSearchParams } from 'expo-router'
 import { Text, SafeAreaView } from 'react-native'
 import axios from 'axios'
 
-import { ScreenHeaderBtn, NearbyJobCard } from '../../components'
-import { COLORS, icons, SIZES } from '../../constants'
-import styles from '../../styles/search'
+import { ScreenHeaderBtn, NearbyJobCard } from '../../../../components'
+
+import { COLORS, icons, SIZES } from '../../../../constants'
+import styles from '../../../../styles/search'
 
 const JobSearch = () => {
     const params = useSearchParams();
@@ -81,7 +82,7 @@ const JobSearch = () => {
                 renderItem={({ item }) => (
                     <NearbyJobCard
                         job={item}
-                        handleNavigate={() => router.push(`/job-details/${item.job_id}`)}
+                        handleNavigate={() => router.push(`home/job-details/${item.job_id}`)}
                     />
                 )}
                 keyExtractor={(item) => item.job_id}
