@@ -22,6 +22,15 @@ export default function Layout() {
         ></Drawer.Screen>
 
         <Drawer.Screen
+            name="save"
+            options={{
+                drawerLabel: 'Saved Jobs',
+                title: "Save",
+                drawerIcon: ({ size, color }) => <AntDesign name="heart" size={size} color="red" />
+            }}
+        ></Drawer.Screen>
+
+        <Drawer.Screen
             name="logout"
             options={{
                 drawerLabel: 'Logout',
