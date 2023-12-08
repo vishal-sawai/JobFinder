@@ -13,24 +13,27 @@ export default function ProfilePage() {
     useEffect(() => {
         auth.onAuthStateChanged((u) => {
             setUser(u);
+            console.log(u);
         });
-    }, []);
 
-    // firebase get data
-    const db = firestore;
-    if (user != null) {
-        // Retrieve data from a specific collection and document
-        db.collection('users').doc(user.uid).get()
-            .then((doc) => {
-                if (doc.exists) {
-                    setUserData(doc.data())
-                }
-            })
-            .catch((error) => {
-                // Handle errors
-                console.error(error);
-            });
-    }
+
+        // firebase get data
+        const db = firestore;
+        if (user != null) {
+            // Retrieve data from a specific collection and document
+            db.collection('users').doc(user.uid).get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        setUserData(doc.data())
+                        console.log("Document data:", doc.data());
+                    }
+                })
+                .catch((error) => {
+                    // Handle errors
+                    console.error(error);
+                });
+        }
+    }, [user]);
 
 
     return (
@@ -39,13 +42,26 @@ export default function ProfilePage() {
             <View>
                 <View>
                     <Image
-                        source={require('../../../assets/images/profile.jpg')}
+                        source={require('../../../assets/images/user.png')}
                         style={styles.image}
                     />
                 </View>
                 <Text style={styles.profileName}>
                     {userData ? userData.name : "Loading..."}
                 </Text>
+
+                <View style={styles.profileDataCotainer}>
+                    <View style={styles.profileData}>
+                        <Text style={styles.profileDataText}>
+                            {userData ? userData.email : "Loading..."}
+                        </Text>
+                    </View>
+                    <View style={styles.profileData}>
+                        <Text style={styles.profileDataText}>
+                            {userData ? userData.phone : "Loading..."}
+                        </Text>
+                    </View>
+                </View>
             </View>
         </View>
     );
@@ -66,5 +82,25 @@ const styles = StyleSheet.create({
         color: '#641E16',
         alignSelf: 'center',
         marginBottom: 10,
+    },
+    profileDataCotainer: {
+        width: '100%',
+        alignSelf: 'center',
+        marginTop: 15,
+        height: '100%',
+    },
+    profileData: {
+        width: '80%',
+        alignSelf: 'center',
+        borderRadius: 5,
+        marginBottom: 10,
+        borderBottomWidth: 2,
+        borderColor: 'skyblue',
+    },
+    profileDataText: {
+        fontSize: 15,
+        alignSelf: 'center',
+        marginVertical: 10,
+        fontWeight: '100',
     },
 })
