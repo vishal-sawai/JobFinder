@@ -16,6 +16,8 @@ export default function Page() {
 
     const router = useRouter()
     const [searchTerm, setSearchTerm] = useState("");
+    const [searchPlace, setSearchPlace] = useState("");
+
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -36,9 +38,11 @@ export default function Page() {
                     <Welcome
                         searchTerm={searchTerm}
                         setSearchTerm={setSearchTerm}
+                        searchPlace={searchPlace}
+                        setSearchPlace={setSearchPlace}
                         handleClick={() => {
-                            if (searchTerm) {
-                                router.push(`/home/search/${searchTerm}`)
+                            if (searchTerm && searchPlace) {
+                                router.push(`/home/search/${searchTerm} in ${searchPlace}`)
                             }
                         }}
                     />

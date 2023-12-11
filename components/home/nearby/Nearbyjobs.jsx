@@ -10,7 +10,7 @@ import useFetch from "../../../hook/useFetch";
 const Nearbyjobs = () => {
   const router = useRouter();
   const { data, isLoading, error } = useFetch("search", {
-    query: "Full Time Job In India",
+    query: "Jobs In Pune",
     num_pages: "1",
   });
 
@@ -21,7 +21,9 @@ const Nearbyjobs = () => {
         <TouchableOpacity
           s="Full Time Job In India"
           handleNavigate={() => { router.push(`/home/search/${s}`) }}>
-          <Text style={styles.headerBtn}>Show all</Text>
+          <Text style={styles.headerBtn} onPress={() => {
+            router.push(`/home/search/Jobs In Pune`);
+          }}>Show all</Text>
         </TouchableOpacity>
       </View>
 

@@ -1,21 +1,95 @@
 import { Drawer } from 'expo-router/drawer';
 import { DrawerToggleButton } from '@react-navigation/drawer';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, RefreshControl, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { auth, firestore } from '../../../firebase'
+import useFetch from '../../../hook/useFetch';
+import { useState, useEffect, useCallback } from 'react';
+import { COLORS } from '../../../constants';
+import NearbyJobCard from '../../../components/common/cards/nearby/NearbyJobCard';
+import { useRouter } from 'expo-router';
+import styles from '../../../components/home/nearby/nearbyjobs.style';
 
 
 
 export default function SavePage() {
+    const [user, setUser] = useState(null);
+    const [savedJobs, setSavedJobs] = useState(null);
+    const [refreshing, setRefreshing] = useState(false);
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        refetch()
+        setRefreshing(false)
+    }, []);
+
+    useEffect(() => {
+        auth.onAuthStateChanged((u) => {
+            setUser(u);
+            console.log(u);
+
+            if (u != null) {
+                firestore.collection('SaveJobs').doc(u.uid).get()
+                    .then((doc) => {
+                        if (doc.exists) {
+                            const data = doc.data();
+                            setSavedJobs(data);
+                            // console.log("Document data:", data);
+                        }
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            }
+        });
+    }, []);
+
+    const router = useRouter();
+    const { data, isLoading, error, refetch } = useFetch("search", {
+        query: "Full Time Job In India",
+        num_pages: "6",
+    });
+
+    const savedJobIds = savedJobs && savedJobs.savedJobs && Object.values(savedJobs.savedJobs);
+    const savedJobsData = data && savedJobIds && data.filter(job => savedJobIds.includes(job.job_id));
 
     return (
-        <View style={{ backgroundColor: 'white' }}>
-            <Drawer.Screen options={{ title: "Saved Jobs", headerShown: true, headerLeft: () => <DrawerToggleButton />, }} />
-            <View>
-                <Text>Save Page</Text>
+        <ScrollView showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        >
+            <View style={{ backgroundColor: 'white' }}>
+                <Drawer.Screen options={{ title: "Saved Jobs", headerShown: true, headerLeft: () => <DrawerToggleButton />, }} />
+
+                <View>
+                    <Text> Kiya hova page</Text>
+                    <Text>Jobs Saved Page</Text>
+                    {savedJobIds && savedJobIds.map((jobId) => (
+                        <Text key={jobId}>{jobId}</Text>
+                    ))}
+                </View>
+
+
+
+                <View style={styles.cardsContainer}>
+                    {isLoading ? (
+                        <ActivityIndicator size='large' color={COLORS.primary} />
+                    ) : error ? (
+                        <Text>Something went wrong</Text>
+                    ) : (
+                        savedJobsData && savedJobsData.length > 0 ? (
+                            savedJobsData.map((job) => (
+                                <NearbyJobCard
+                                    job={job}
+                                    key={`nearby-job-${job.job_id}`}
+                                    handleNavigate={() => router.push(`/home/job-details/${job.job_id}`)}
+                                />
+                            ))
+                        ) : (
+                            <Text style={{ textAlign: 'center' }} >No saved jobs found</Text>
+                        )
+                    )}
+                </View>
+
             </View>
-        </View>
+        </ScrollView>
     );
 }
-
-const styles = StyleSheet.create({
-
-})

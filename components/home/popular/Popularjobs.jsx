@@ -32,7 +32,9 @@ const Popularjobs = () => {
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Popular jobs</Text>
         <TouchableOpacity>
-          <Text style={styles.headerBtn}>Show all</Text>
+          <Text style={styles.headerBtn} onPress={() => {
+            router.push(`/home/search/Software Engineer In India`);
+          }}>Show all</Text>
         </TouchableOpacity>
       </View>
 

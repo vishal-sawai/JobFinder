@@ -8,7 +8,12 @@ const Signup = () => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
+    const [astate, setastate] = useState('');
+    const [city, setcity] = useState('');
+    const [exprience, setexprience] = useState('');
     const [password, setPassword] = useState('');
+    const [Eduction, setEduction] = useState('');
+    const [position, setposition] = useState('');
 
     const handleSignup = () => {
         auth
@@ -22,6 +27,11 @@ const Signup = () => {
                     name: name,
                     phone: phone,
                     email: email,
+                    astate: astate,
+                    city: city,
+                    exprience: exprience,
+                    Eduction: Eduction,
+                    position: position,
                 };
                 firestore.collection('users').doc(user.uid).set(userData).then(() => {
                     // User is signed up and data is saved
@@ -59,53 +69,94 @@ const Signup = () => {
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: 'white' }} useRef='scroll'>
-            <KeyboardAvoidingView behavior='position' style={{ backgroundColor: 'white', flex: 1 }}>
-                <View style={styles.container}>
-                    <Image
-                        source={require('../assets/images/signup.png')}
-                        style={styles.image}
+            {/* <KeyboardAvoidingView behavior='position' style={{ backgroundColor: 'white', flex: 1 }}> */}
+            <View style={styles.container}>
+                {/* <Image
+                    source={require('../assets/images/signup.png')}
+                    style={styles.image}
+                /> */}
+
+                <View>
+                    <Text style={styles.pageHeading}>Sign Up</Text>
+                </View>
+                <View style={styles.form}>
+
+                    <Text style={styles.label}>Name</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter Your Full Name"
+                        value={name}
+                        onChangeText={setName}
+                    />
+                    <Text style={styles.label}>Phone</Text>
+                    <TextInput
+                        style={styles.input}
+                        keyboardType='numeric'
+                        placeholder="Enter Your Phone No"
+                        value={phone}
+                        onChangeText={setPhone}
+                        maxLength={10}
                     />
 
-                    <View>
-                        <Text style={styles.pageHeading}>Sign Up</Text>
-                    </View>
-                    <View style={styles.form}>
-                        <Text style={styles.label}>Name</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Enter Your Full Name"
-                            value={name}
-                            onChangeText={setName}
-                        />
-                        <Text style={styles.label}>Phone</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Enter Your Phone No"
-                            value={phone}
-                            onChangeText={setPhone}
-                        />
+                    <Text style={styles.label}>Email</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter your email"
+                        value={email}
+                        onChangeText={setEmail}
+                        keyboardType="email-address"
+                    />
+                    <Text style={styles.label}>Password</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Password"
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry
+                    />
+                    <Text style={styles.label}>Address</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter Your state Name"
+                        value={astate}
+                        onChangeText={setastate}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter Your city Name"
+                        value={city}
+                        onChangeText={setcity}
+                    />
 
-                        <Text style={styles.label}>Email</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Enter your email"
-                            value={email}
-                            onChangeText={setEmail}
-                            keyboardType="email-address"
-                        />
-                        <Text style={styles.label}>Password</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Password"
-                            value={password}
-                            onChangeText={setPassword}
-                            secureTextEntry
-                        />
-                        <Button title="Signup" onPress={handleSignup} />
-                    </View>
+                    <Text style={styles.label}>Eduction</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Highest Qualification"
+                        value={Eduction}
+                        onChangeText={setEduction}
+                    />
+                    <Text style={styles.label}>position</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter Your position"
+                        value={position}
+                        onChangeText={setposition}
+                    />
+                    <Text style={styles.label}>Exprience</Text>
+                    <TextInput
+                        style={styles.input}
+                        keyboardType='numeric'
+                        placeholder="Enter Your Year Of Exprience"
+                        value={exprience}
+                        onChangeText={setexprience}
+                    />
+                    <Button style={styles.submitBtn} title="Signup" onPress={handleSignup} />
+
                 </View>
-            </KeyboardAvoidingView>
-        </ScrollView>
+            </View>
+
+            {/* </KeyboardAvoidingView > */}
+        </ScrollView >
     );
 };
 
@@ -117,16 +168,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#FDFEFE'
     },
-    image: {
-        width: 250,
-        height: 150,
-        marginTop: '5%'
-    },
+    // image: {
+    //     width: 250,
+    //     height: 150,
+    //     marginTop: '5%'
+    // },
     pageHeading: {
         fontWeight: '500',
         fontSize: 30,
         color: '#8E44AD',
-        marginTop: 10
+        marginTop: 25
     },
     form: {
         marginTop: 25,

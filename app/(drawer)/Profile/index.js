@@ -35,7 +35,6 @@ export default function ProfilePage() {
         }
     }, [user]);
 
-
     return (
         <View style={{ backgroundColor: 'white' }}>
             <Drawer.Screen options={{ title: "Profile", headerShown: true, headerLeft: () => <DrawerToggleButton />, }} />
@@ -49,8 +48,26 @@ export default function ProfilePage() {
                 <Text style={styles.profileName}>
                     {userData ? userData.name : "Loading..."}
                 </Text>
+                <Text style={{ fontSize: 20, textAlign: 'center', marginTop: -8, fontWeight: '300', color: 'red' }}>
+                    {userData ? userData.Eduction : "Loading..."}
+                </Text>
 
                 <View style={styles.profileDataCotainer}>
+                    <View style={styles.profileData}>
+                        <Text style={styles.profileDataText}>
+                            {userData ? userData.city : "Loading..."}, {userData ? userData.astate : "Loading..."}
+                        </Text>
+                    </View>
+                    <View style={styles.profileData}>
+                        <Text style={styles.profileDataText}>
+                            <Text style={{ fontSize: 16, fontWeight: '300' }}>Position:</Text>   {userData ? userData.position : "Loading..."}
+                        </Text>
+                    </View>
+                    <View style={styles.profileData}>
+                        <Text style={styles.profileDataText}>
+                            <Text style={{ fontSize: 16, fontWeight: '300' }}>Exprience:</Text>   {userData ? (userData.exprience) > 0 ? userData.exprience + " Years" : "Fresher" : "Loading..."}
+                        </Text>
+                    </View>
                     <View style={styles.profileData}>
                         <Text style={styles.profileDataText}>
                             {userData ? userData.email : "Loading..."}
@@ -61,6 +78,7 @@ export default function ProfilePage() {
                             {userData ? userData.phone : "Loading..."}
                         </Text>
                     </View>
+
                 </View>
             </View>
         </View>
