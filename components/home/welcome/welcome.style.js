@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
     height: 50,
     marginVertical: 2,
     paddingHorizontal: SIZES.large,
+    borderColor: 'skyblue',
+    borderRadius: SIZES.medium,
+    borderWidth: 1,
   },
   searchBtn: {
     width: '100%',

@@ -24,15 +24,12 @@ export default function SavePage() {
     useEffect(() => {
         auth.onAuthStateChanged((u) => {
             setUser(u);
-            console.log(u);
-
             if (u != null) {
                 firestore.collection('SaveJobs').doc(u.uid).get()
                     .then((doc) => {
                         if (doc.exists) {
                             const data = doc.data();
                             setSavedJobs(data);
-                            // console.log("Document data:", data);
                         }
                     })
                     .catch((error) => {
@@ -58,17 +55,6 @@ export default function SavePage() {
         >
             <View style={{ backgroundColor: 'white' }}>
                 <Drawer.Screen options={{ title: "Saved Jobs", headerShown: true, headerLeft: () => <DrawerToggleButton />, }} />
-
-                <View>
-                    <Text> Kiya hova page</Text>
-                    <Text>Jobs Saved Page</Text>
-                    {savedJobIds && savedJobIds.map((jobId) => (
-                        <Text key={jobId}>{jobId}</Text>
-                    ))}
-                </View>
-
-
-
                 <View style={styles.cardsContainer}>
                     {isLoading ? (
                         <ActivityIndicator size='large' color={COLORS.primary} />
@@ -88,7 +74,6 @@ export default function SavePage() {
                         )
                     )}
                 </View>
-
             </View>
         </ScrollView>
     );

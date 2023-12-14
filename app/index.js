@@ -29,7 +29,7 @@ export default function page() {
       </View>
       <View style={styles.tagLine}>
         <Text style={styles.tagLineText}>Unlock Opportunities,
-          Empower Your Future with JobFindr</Text>
+          Empower Your Future with JobFinder</Text>
       </View>
       <View style={styles.btnGroup}>
         <Link href="/signin" asChild>
