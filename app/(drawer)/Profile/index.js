@@ -13,7 +13,7 @@ export default function ProfilePage() {
     useEffect(() => {
         auth.onAuthStateChanged((u) => {
             setUser(u);
-            console.log(u);
+            // console.log(u);
         });
 
 
@@ -25,7 +25,7 @@ export default function ProfilePage() {
                 .then((doc) => {
                     if (doc.exists) {
                         setUserData(doc.data())
-                        console.log("Document data:", doc.data());
+                        // console.log("Document data:", doc.data());
                     }
                 })
                 .catch((error) => {

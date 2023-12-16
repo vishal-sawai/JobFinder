@@ -26,7 +26,7 @@ const Welcome = ({ searchTerm, setSearchTerm, searchPlace, setSearchPlace, handl
   useEffect(() => {
     auth.onAuthStateChanged((u) => {
       setUser(u);
-      console.log(u);
+      // console.log(u);
     });
     // firebase get data
     const db = firestore;
@@ -36,7 +36,7 @@ const Welcome = ({ searchTerm, setSearchTerm, searchPlace, setSearchPlace, handl
         .then((doc) => {
           if (doc.exists) {
             setUserData(doc.data())
-            console.log("Document data:", doc.data());
+            // console.log("Document data:", doc.data());
           }
         })
         .catch((error) => {

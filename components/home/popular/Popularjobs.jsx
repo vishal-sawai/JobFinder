@@ -22,7 +22,7 @@ const Popularjobs = () => {
   useEffect(() => {
     auth.onAuthStateChanged((u) => {
       setUser(u);
-      console.log(u);
+      // console.log(u);
     });
     // firebase get data
     const db = firestore;
@@ -32,7 +32,7 @@ const Popularjobs = () => {
         .then((doc) => {
           if (doc.exists) {
             setUserData(doc.data())
-            console.log("Document data:", doc.data());
+            // console.log("Document data:", doc.data());
           }
         })
         .catch((error) => {
@@ -50,7 +50,7 @@ const Popularjobs = () => {
   });
 
   const handleCardPress = (item) => {
-    router.push(`/ home / job - details / ${item.job_id}`);
+    router.push(`/home/job-details/${item.job_id}`);
     setSelectedJob(item.job_id);
   };
 
@@ -60,7 +60,7 @@ const Popularjobs = () => {
         <Text style={styles.headerTitle}>Popular jobs</Text>
         <TouchableOpacity>
           <Text style={styles.headerBtn} onPress={() => {
-            router.push(`/ home / search / ` + (userData ? userData.position : "Popular jobs in india") + ` Popular jobs in india`);
+            router.push(`/home/search/` + (userData ? userData.position : "Popular jobs in india") + ` Popular jobs in india`);
           }}>Show all</Text>
         </TouchableOpacity>
       </View>

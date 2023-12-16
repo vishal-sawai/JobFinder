@@ -11,7 +11,6 @@ import * as Location from 'expo-location';
 const Nearbyjobs = () => {
 
 
-  const [location, setLocation] = useState(null);
   const [address, setAddress] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
@@ -25,17 +24,16 @@ const Nearbyjobs = () => {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      let address = await Location.reverseGeocodeAsync(location.coords);
-      setLocation(location);
-      setAddress(address);
+      let addressArray = await Location.reverseGeocodeAsync(location.coords);
+      setAddress(addressArray[0]); // Set the first object in the array as the address
+
     })();
   }, []);
 
 
-
   const router = useRouter();
   const { data, isLoading, error } = useFetch("search", {
-    query: "Full Time Jobs In India",
+    query: (address ? address?.city + " " + address?.region + " " + "India" : "Full Time Jobs In pune India"),
     num_pages: "1",
   });
 
@@ -44,10 +42,9 @@ const Nearbyjobs = () => {
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Nearby jobs</Text>
         <TouchableOpacity
-          s="Full Time Job In India"
-          handleNavigate={() => { router.push(`/home/search/${s}`) }}>
+          handleNavigate={() => { router.push(`/home/search/Jobs In `(address?.city + " " + address?.region) + ` India`) }}>
           <Text style={styles.headerBtn} onPress={() => {
-            router.push(`/home/search/Jobs In Pune`);
+            router.push(`/home/search/Jobs In ` + (address?.city + " " + address?.region) + ` India`);
           }}>Show all</Text>
         </TouchableOpacity>
       </View>

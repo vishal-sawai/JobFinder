@@ -65,7 +65,7 @@ const Footer = ({ url, jobId }) => {
     });
   };
 
-  console.log(addSave);
+  // console.log(addSave);c
 
   return (
     <View style={styles.container}>
